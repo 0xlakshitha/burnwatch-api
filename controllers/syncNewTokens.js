@@ -22,7 +22,7 @@ let addressQueue = new Queue
 
 
 const redisClient = Redis.createClient()
-redisClient.connect()
+// redisClient.connect()
 
 
 const initQueue = async () => {
