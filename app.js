@@ -27,8 +27,10 @@ app.use('/api/erc20', tokenRouter)
 app.use('/api/address', addressRouter)
 
 import syncERC20 from './controllers/syncERC20.js'
+import syncBSC20 from './controllers/syncBSC20.js'
 
-syncERC20()
+// syncERC20()
+syncBSC20()
 
 
 const port = process.env.PORT || 5000

@@ -11,7 +11,7 @@ import logger from '../config/logger.js'
 
 dotenv.config()
 
-const apikey = process.env.ERC_API_KEY
+const apikey = process.env.BSC_API_KEY
 
 let addressQueue = new Queue
 
@@ -33,7 +33,7 @@ const initQueue = async () => {
     }
 }
 
-const syncERC20 = async () => {
+const syncBSC20 = async () => {
 
     await initQueue()
 
@@ -46,36 +46,36 @@ const syncERC20 = async () => {
 
                 try {
                     
-                    let { data } = await axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${addr.address}&page=1&offset=100&startblock=0&sort=desc&apikey=${apikey}`)
+                    let { data } = await axios.get(`https://api.bscscan.com/api?module=account&action=tokentx&address=${addr.address}&page=1&offset=100&startblock=0&sort=desc&apikey=${apikey}`)
                     
-                    const erc20tokens = data.result
+                    const bsc20tokens = data.result
 
-                    const previousData = await redisClient.get(`ERC-${addr.address}`)
+                    const previousData = await redisClient.get(`BSC-${addr.address}`)
 
                     if(previousData) {
                         const parseTokens = await JSON.parse(previousData)
-                        const newErc20tokens = onlyInLeft(erc20tokens, parseTokens, isSameToken)
+                        const newBsc20tokens = onlyInLeft(bsc20tokens, parseTokens, isSameToken)
                         
-                        if(newErc20tokens.length > 0) {
+                        if(newBsc20tokens.length > 0) {
 
-                            newErc20tokens.forEach(async (erc20) => {
-                                if(erc20.to === addr.address) {
-                                    const newERC20 = { type: 'ERC-20', ...erc20 }
-                                    await addToken(newERC20)
+                            newBsc20tokens.forEach(async (bsc20) => {
+                                if(bsc20.to === addr.address) {
+                                    const newBSC20 = { type: 'BSC-20', ...bsc20 }
+                                    await addToken(newBSC20)
                                 }
                             })
                         }
                         
                     }
                     else {
-                        erc20tokens.forEach(async (erc20) => {
-                            if(erc20.to === addr.address) {
-                                const newERC20 = { type: 'ERC-20', ...erc20 }
-                                await addToken(newERC20)
+                        bsc20tokens.forEach(async (bsc20) => {
+                            if(bsc20.to === addr.address) {
+                                const newBSC20 = { type: 'BSC-20', ...bsc20 }
+                                await addToken(newBSC20)
                             }
                         })
                         
-                        await redisClient.set(`ERC-${addr.address}`, JSON.stringify(erc20tokens))
+                        await redisClient.set(`BSC-${addr.address}`, JSON.stringify(bsc20tokens))
 
                         setTimeout(() => {
                             outerFunc()
@@ -84,7 +84,7 @@ const syncERC20 = async () => {
                         return
                     }
 
-                    await redisClient.set(`ERC-${addr.address}`, JSON.stringify(erc20tokens))
+                    await redisClient.set(`BSC-${addr.address}`, JSON.stringify(bsc20tokens))
 
                     setTimeout(() => {
                         outerFunc()
@@ -92,14 +92,15 @@ const syncERC20 = async () => {
 
                 } catch (error) {
                     innerFunc()
-                    logger.error(error)
+                    // logger.error(error)
+                    console.log(error)
                 }
             }
 
             innerFunc()
         } else {
             setTimeout(() => {
-                syncERC20()
+                syncBSC20()
             }, 5000) 
             
         }
@@ -109,6 +110,6 @@ const syncERC20 = async () => {
 
 }
 
-export default syncERC20
+export default syncBSC20
 
 
