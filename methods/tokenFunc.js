@@ -2,6 +2,16 @@ import db from '../models/index.js'
 
 const Token = db.tokenTbl
 
+const getTrueValue = (value, decimal) => {
+    if(decimal !== '') {
+        const newValue = parseInt(value) / Math.pow(10, parseInt(decimal))
+        return newValue.toString()
+    }
+    else {
+        return ''
+    }
+}
+
 export const addToken = async (token) => {
     const newToken = {
         txnHash: token.hash,
@@ -10,8 +20,11 @@ export const addToken = async (token) => {
         from: token.from,
         to: token.to,
         value: token.value,
+        fixedValue: getTrueValue(token.value, token.tokenDecimal),
+        contractAddress: token.contractAddress,
         tokenName: token.tokenName,
-        tokenSymbol: token.tokenSymbol
+        tokenSymbol: token.tokenSymbol,
+        tokenDecimal: token.tokenDecimal
     }
 
     try {

@@ -31,25 +31,34 @@ export default (sequelize, DataTypes) => {
         to: {
             type: DataTypes.STRING
         },
+        contractAddress: {
+            type: DataTypes.STRING
+        },
         value: {
             type: DataTypes.STRING,
 
-            get() {
-                const value = this.getDataValue('value')
-                if(value.length > 18) {
-                    const valueNbr = parseInt(value) / Math.pow(10, 18)
-                    return valueNbr.toString()
-                }
-                else {
-                    const valueNbr = parseInt(value) / Math.pow(10, 9)
-                    return valueNbr.toString()
-                }
-            }
+            // get() {
+            //     const value = this.getDataValue('value')
+            //     if(value.length > 18) {
+            //         const valueNbr = parseInt(value) / Math.pow(10, 18)
+            //         return valueNbr.toString()
+            //     }
+            //     else {
+            //         const valueNbr = parseInt(value) / Math.pow(10, 9)
+            //         return valueNbr.toString()
+            //     }
+            // }
+        },
+        fixedValue: {
+            type: DataTypes.STRING
         },
         tokenName: {
             type: DataTypes.STRING
         },
         tokenSymbol: {
+            type: DataTypes.STRING
+        },
+        tokenDecimal: {
             type: DataTypes.STRING
         },
         token: {
@@ -65,7 +74,7 @@ export default (sequelize, DataTypes) => {
             set(value) {
                 throw new Error('Do not try to set the `token` value!');
             }
-        }
+        },
     }, {
         timestamps: false
     })
