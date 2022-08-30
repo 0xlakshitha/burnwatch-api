@@ -26,9 +26,9 @@ import addressRouter from './routes/addressRoute.js'
 app.use('/api/erc20', tokenRouter)
 app.use('/api/address', addressRouter)
 
-import syncNewTokenFunc from './controllers/syncNewTokens.js'
+import syncERC20 from './controllers/syncERC20.js'
 
-syncNewTokenFunc()
+syncERC20()
 
 
 const port = process.env.PORT || 5000

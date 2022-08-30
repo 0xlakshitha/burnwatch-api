@@ -2,6 +2,9 @@ import ageGenerator from '../methods/ageGenerator.js'
 
 export default (sequelize, DataTypes) => {
     const TokenTxn = sequelize.define('TokenTxn', {
+        tokenType: {
+            type: DataTypes.STRING,
+        },
         txnHash: {
             type: DataTypes.STRING,
             allowNull: false
@@ -36,18 +39,6 @@ export default (sequelize, DataTypes) => {
         },
         value: {
             type: DataTypes.STRING,
-
-            // get() {
-            //     const value = this.getDataValue('value')
-            //     if(value.length > 18) {
-            //         const valueNbr = parseInt(value) / Math.pow(10, 18)
-            //         return valueNbr.toString()
-            //     }
-            //     else {
-            //         const valueNbr = parseInt(value) / Math.pow(10, 9)
-            //         return valueNbr.toString()
-            //     }
-            // }
         },
         fixedValue: {
             type: DataTypes.STRING

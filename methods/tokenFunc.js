@@ -14,6 +14,7 @@ const getTrueValue = (value, decimal) => {
 
 export const addToken = async (token) => {
     const newToken = {
+        tokenType: token.type,
         txnHash: token.hash,
         blockNumber: token.blockNumber,
         timeStamp: token.timeStamp,
