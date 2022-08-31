@@ -28,22 +28,23 @@ app.use('/api/address', addressRouter)
 
 import syncERC20 from './controllers/syncERC20.js'
 import syncBSC20 from './controllers/syncBSC20.js'
+import erc20Reverse from './controllers/erc20Reverse.js'
 
-// syncERC20()
-syncBSC20()
-
+syncERC20()
+// syncBSC20()
+erc20Reverse()
 
 const port = process.env.PORT || 5000
 
-if(cluster.isPrimary) {
-    for(let i = 0; i < cpuCount; i++) {
-        cluster.fork()
-    }
-    cluster.on('exit', (worker, code, signal) => {
-        cluster.fork()
-    })
-}else {
-    app.listen(5000, logger.info(`Server running on port ${port} - pid: ${process.pid}`))
-}
+// if(cluster.isPrimary) {
+//     for(let i = 0; i < cpuCount; i++) {
+//         cluster.fork()
+//     }
+//     cluster.on('exit', (worker, code, signal) => {
+//         cluster.fork()
+//     })
+// }else {
+//     app.listen(5000, logger.info(`Server running on port ${port} - pid: ${process.pid}`))
+// }
 
-// app.listen(5000, logger.info(`Server running on port ${port} - pid: ${process.pid}`))
+app.listen(5000, logger.info(`Server running on port ${port} - pid: ${process.pid}`))

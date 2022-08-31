@@ -1,4 +1,5 @@
 import db from '../models/index.js'
+import logger from '../config/logger.js'
 
 const Address = db.addressTbl
 
@@ -6,7 +7,7 @@ export const getAllAddr = async () => {
     try {
 
         const addrTemp = await Address.findAll({
-            attributes: ['address', 'isSynced', 'startBlock', 'endBlock', 'lastTimeStamp'],
+            attributes: ['address', 'ercHistory', 'bscHistory'],
     
             where: {
                 isActive: true
@@ -17,63 +18,35 @@ export const getAllAddr = async () => {
         return JSON.parse(data)
 
     } catch (error) {
-        console.log(error.message)
+        logger.error(error.message)
     }
 }
 
-export const updateSyncedState = async (addr) => {
+export const updateErcSyncedState = async (addr) => {
     try {
         await Address.update({ 
-            isSynced: true
+            ercHIstory: true
         }, {
             where: {
               address: addr
             }
         });
     } catch (error) {
-        console.log(error.message)
+        logger.error(error.message)
     }
 }
 
-export const updateStartBlock = async (startBlock, addr) => {
+export const updateBscSyncedState = async (addr) => {
     try {
         await Address.update({ 
-            startBlock: parseInt(startBlock)
+            bscHIstory: true
         }, {
             where: {
               address: addr
             }
         });
     } catch (error) {
-        console.log(error.message)
-    }
-}
-
-export const updateEndBlock = async (endBlock, addr) => {
-    try {
-        await Address.update({ 
-            endBlock: parseInt(endBlock)
-        }, {
-            where: {
-              address: addr
-            }
-        });
-    } catch (error) {
-        console.log(error.message)
-    }
-}
-
-export const updateTimeStamp = async (ts, addr) => {
-    try {
-        await Address.update({ 
-            lastTimeStamp: ts
-        }, {
-            where: {
-              address: addr
-            }
-        });
-    } catch (error) {
-        console.log(error.message)
+        logger.error(error.message)
     }
 }
 

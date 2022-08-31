@@ -1,4 +1,6 @@
+import logger from '../config/logger.js'
 import db from '../models/index.js'
+import sequelize from 'sequelize'
 
 const Token = db.tokenTbl
 
@@ -31,6 +33,27 @@ export const addToken = async (token) => {
     try {
         await Token.create(newToken)
     } catch (error) {
-        console.log(error.message)
+        logger.error(error.message)
+    }
+}
+
+export const getEndBlock = async (type, address) => {
+    try {
+        let endblock = await Token.findOne({
+            attributes: ['blockNumber'],
+            where: {
+                to: address,
+                tokenType: type
+            },
+            order: sequelize.literal('timeStamp ASC'),
+        })
+
+        endblock = JSON.stringify(endblock, null, 2)
+        endblock = JSON.parse(endblock)
+
+        return endblock.blockNumber
+
+    } catch (error) {
+        logger.error(error.message)
     }
 }

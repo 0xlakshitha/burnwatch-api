@@ -68,6 +68,7 @@ const syncERC20 = async () => {
                         
                     }
                     else {
+
                         erc20tokens.forEach(async (erc20) => {
                             if(erc20.to === addr.address) {
                                 const newERC20 = { type: 'ERC-20', ...erc20 }
@@ -76,6 +77,7 @@ const syncERC20 = async () => {
                         })
                         
                         await redisClient.set(`ERC-${addr.address}`, JSON.stringify(erc20tokens))
+                        await redisClient.set(`ERCHistory-${addr.address}`, JSON.stringify(erc20tokens))
 
                         setTimeout(() => {
                             outerFunc()

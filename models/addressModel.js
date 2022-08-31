@@ -6,24 +6,14 @@ export default (sequelize, DataTypes) => {
             primaryKey: true
         },
 
-        isSynced: {
+        ercHIstory: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
 
-        startBlock: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
-        },
-
-        endBlock: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
-        },
-
-        lastTimeStamp: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
+        bscHIstory: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
 
         isActive: {
