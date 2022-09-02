@@ -45,34 +45,27 @@ const bep20Reverse = async () => {
 
         if(addr) {
             if(!addr.bepHistory) {
-                console.log(`bsc reverse running for ${addr.address}`)
 
                 let lastTokens = await redisClient.get(`BEPHistory-${addr.address}`)
 
                 if(lastTokens) {
 
-                    console.log('have last tokens')
                     const innerFunc = async (pageNbr = 1, blockNumber) => {
                         let endblock = blockNumber ? blockNumber : await getEndBlock('BEP-20', addr.address)
                         let page = pageNbr > 10 ? 1 : pageNbr
-                        console.log(endblock)
+
                         let isCompleted = false
         
-                        console.log(page)
                         try {
                             
                             let { data } = await axios.get(`https://api.bscscan.com/api?module=account&action=tokentx&address=${addr.address}&page=${page}&offset=1000&startblock=0&endblock=${endblock}&sort=desc&apikey=${apikey}`)
                             
                             const bep20tokens = data.result
 
-                            console.log(bep20tokens.length)
-
                             let lastTokens = await redisClient.get(`BEPHistory-${addr.address}`)
 
                             const parseTokens = await JSON.parse(lastTokens)
                             const newBEP20tokens = onlyInLeft(bep20tokens, parseTokens, isSameToken)
-
-                            console.log(newBEP20tokens.length)
                             
                             if(newBEP20tokens.length > 0) {
 
@@ -102,10 +95,7 @@ const bep20Reverse = async () => {
 
                             page++
 
-                            console.log(isCompleted)
-
                             if(isCompleted){
-                                console.log('bep history complete')
                                 outerFunc()
                                 return
                             }
@@ -128,14 +118,12 @@ const bep20Reverse = async () => {
                     innerFunc()
                 }
                 else {
-                    console.log('no last tokens. i am out')
                     setTimeout(() => {
                         outerFunc()
                     }, 2000)
                 }
             }
             else {
-                console.log(`${addr.address} already synced`)
                 setTimeout(() => {
                     outerFunc()
                 }, 5000)
@@ -143,7 +131,6 @@ const bep20Reverse = async () => {
             
 
         } else {
-            console.log('no addresses to get history')
             setTimeout(() => {
                 bep20Reverse()
             }, 20000) 

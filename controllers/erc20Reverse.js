@@ -45,34 +45,27 @@ const erc20Reverse = async () => {
 
         if(addr) {
             if(!addr.ercHistory) {
-                console.log(`erc reverse running for ${addr.address}`)
 
                 let lastTokens = await redisClient.get(`ERCHistory-${addr.address}`)
 
                 if(lastTokens) {
 
-                    console.log('have last tokens')
                     const innerFunc = async (pageNbr = 1, blockNumber) => {
                         let endblock = blockNumber ? blockNumber : await getEndBlock('ERC-20', addr.address)
                         let page = pageNbr > 10 ? 1 : pageNbr
-                        console.log(endblock)
+
                         let isCompleted = false
         
-                        console.log(page)
                         try {
                             
                             let { data } = await axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${addr.address}&page=${page}&offset=1000&startblock=0&endblock=${endblock}&sort=desc&apikey=${apikey}`)
                             
                             const erc20tokens = data.result
 
-                            console.log(erc20tokens.length)
-
                             let lastTokens = await redisClient.get(`ERCHistory-${addr.address}`)
 
                             const parseTokens = await JSON.parse(lastTokens)
                             const newErc20tokens = onlyInLeft(erc20tokens, parseTokens, isSameToken)
-
-                            console.log(newErc20tokens.length)
                             
                             if(newErc20tokens.length > 0) {
 
@@ -117,10 +110,7 @@ const erc20Reverse = async () => {
 
                             page++
 
-                            console.log(isCompleted)
-
                             if(isCompleted){
-                                console.log('erc history complete')
                                 outerFunc()
                                 return
                             }
@@ -143,14 +133,12 @@ const erc20Reverse = async () => {
                     innerFunc()
                 }
                 else {
-                    console.log('no last tokens. i am out')
                     setTimeout(() => {
                         outerFunc()
                     }, 2000)
                 }
             }
             else {
-                console.log(`${addr.address} already synced`)
                 setTimeout(() => {
                     outerFunc()
                 }, 5000)
@@ -158,7 +146,6 @@ const erc20Reverse = async () => {
             
 
         } else {
-            console.log('no addresses to get history')
             setTimeout(() => {
                 erc20Reverse()
             }, 20000) 
