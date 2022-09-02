@@ -31,7 +31,7 @@ import syncBSC20 from './controllers/syncBSC20.js'
 import erc20Reverse from './controllers/erc20Reverse.js'
 
 syncERC20()
-// syncBSC20()
+syncBSC20()
 erc20Reverse()
 
 const port = process.env.PORT || 5000

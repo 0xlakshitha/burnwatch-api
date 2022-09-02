@@ -53,12 +53,14 @@ const erc20Reverse = async () => {
                     console.log('have last tokens')
                     const innerFunc = async (pageNbr = 1, blockNumber) => {
                         let endblock = blockNumber ? blockNumber : await getEndBlock('ERC-20', addr.address)
-                        let page = pageNbr > 100 ? 1 : pageNbr
+                        let page = pageNbr > 10 ? 1 : pageNbr
+                        console.log(endblock)
+                        let isCompleted = false
         
                         console.log(page)
                         try {
                             
-                            let { data } = await axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${addr.address}&page=${page}&offset=100&startblock=0&endblock=${endblock}&sort=desc&apikey=${apikey}`)
+                            let { data } = await axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${addr.address}&page=${page}&offset=1000&startblock=0&endblock=${endblock}&sort=desc&apikey=${apikey}`)
                             
                             const erc20tokens = data.result
 
@@ -73,35 +75,64 @@ const erc20Reverse = async () => {
                             
                             if(newErc20tokens.length > 0) {
 
-                                newErc20tokens.forEach(async (erc20) => {
-                                    if(parseInt(erc20.timeStamp) <= 1661385600) {
-                                        console.log('erc history complete')
+                                // newErc20tokens.forEach(async (erc20) => {
+                                //     if(parseInt(erc20.timeStamp) <= 1661385600) {
+                                        
+                                //         await updateErcSyncedState(addr.address)
+                                //         isCompleted = true
+                                        
+                                //     }
+                                //     else {
+                                //         if(erc20.to === addr.address) {
+                                //             const newERC20 = { type: 'ERC-20', ...erc20 }
+                                //             await addToken(newERC20)
+                                //         }
+                                //     }
+                                // })
+
+                                for(let i = 0; i < newErc20tokens.length; i++) {
+                                    if(parseInt(newErc20tokens[i].timeStamp) <= 1661385600) {
+                                        
                                         await updateErcSyncedState(addr.address)
-                                        outerFunc()
-                                        return
+                                        isCompleted = true;
+                                        break
+                                        
                                     }
                                     else {
-                                        if(erc20.to === addr.address) {
-                                            const newERC20 = { type: 'ERC-20', ...erc20 }
+                                        if(newErc20tokens[i].to === addr.address) {
+                                            const newERC20 = { type: 'ERC-20', ...newErc20tokens[i] }
                                             await addToken(newERC20)
                                         }
                                     }
-                                })
+                                }
                             }
                                 
         
                             await redisClient.set(`ERCHistory-${addr.address}`, JSON.stringify(erc20tokens))
 
-                            if(page === 100) {
+                            if(page === 10) {
                                 endblock = erc20tokens[erc20tokens.length - 1].blockNumber
                             }
 
                             page++
+
+                            console.log(isCompleted)
+
+                            if(isCompleted){
+                                console.log('erc history complete')
+                                outerFunc()
+                                return
+                            }
+                            else {
+                                setTimeout(() => {
+                                    innerFunc(page, endblock)
+                                }, 2000)    
+                            }
+
+                            // setTimeout(() => {
+                            //     innerFunc(page, endblock)
+                            // }, 2000)
                             
-                            setTimeout(() => {
-                                innerFunc(page, endblock)
-                            }, 2000)
-        
                         } catch (error) {
                             innerFunc()
                             logger.error(error)
