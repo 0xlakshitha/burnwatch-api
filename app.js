@@ -31,10 +31,11 @@ import syncBEP20 from './controllers/syncBEP20.js'
 import erc20Reverse from './controllers/erc20Reverse.js'
 import bep20Reverse from './controllers/bep20Reverse.js'
 
-// syncERC20()
+syncERC20()
 syncBEP20()
-// erc20Reverse()
+erc20Reverse()
 bep20Reverse()
+
 
 const port = process.env.PORT || 5000
 

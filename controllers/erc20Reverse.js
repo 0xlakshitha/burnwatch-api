@@ -6,7 +6,7 @@ import {
     updateErcSyncedState
 } from '../methods/addressFunc.js'
 import { getEndBlock } from '../methods/tokenFunc.js'
-import { addToken } from '../methods/tokenFunc.js'
+import { addToken, getTokenSymbols } from '../methods/tokenFunc.js'
 import Redis from 'redis'
 import { isSameToken, isSameTxn, onlyInLeft } from '../methods/filterOptions.js'
 import logger from '../config/logger.js'
@@ -37,6 +37,7 @@ const initQueue = async () => {
 const erc20Reverse = async () => {
 
     await initQueue()
+    const tokenSymbols = await getTokenSymbols()
 
     const outerFunc = async () => {
         const addr = addressQueue.dequeue()
@@ -91,7 +92,7 @@ const erc20Reverse = async () => {
                                 // })
 
                                 for(let i = 0; i < newErc20tokens.length; i++) {
-                                    if(parseInt(newErc20tokens[i].timeStamp) <= 1661385600) {
+                                    if(parseInt(newErc20tokens[i].timeStamp) <= 1640995200) {
                                         
                                         await updateErcSyncedState(addr.address)
                                         isCompleted = true;
@@ -99,7 +100,7 @@ const erc20Reverse = async () => {
                                         
                                     }
                                     else {
-                                        if(newErc20tokens[i].to === addr.address) {
+                                        if(newErc20tokens[i].to === addr.address && tokenSymbols.includes(newErc20tokens[i].tokenSymbol)) {
                                             const newERC20 = { type: 'ERC-20', ...newErc20tokens[i] }
                                             await addToken(newERC20)
                                         }

@@ -6,7 +6,7 @@ import {
     updateBepSyncedState
 } from '../methods/addressFunc.js'
 import { getEndBlock } from '../methods/tokenFunc.js'
-import { addToken } from '../methods/tokenFunc.js'
+import { addToken, getTokenSymbols } from '../methods/tokenFunc.js'
 import Redis from 'redis'
 import { isSameToken, isSameTxn, onlyInLeft } from '../methods/filterOptions.js'
 import logger from '../config/logger.js'
@@ -37,6 +37,7 @@ const initQueue = async () => {
 const bep20Reverse = async () => {
 
     await initQueue()
+    const tokenSymbols = await getTokenSymbols()
 
     const outerFunc = async () => {
         const addr = addressQueue.dequeue()
@@ -75,23 +76,8 @@ const bep20Reverse = async () => {
                             
                             if(newBEP20tokens.length > 0) {
 
-                                // newErc20tokens.forEach(async (erc20) => {
-                                //     if(parseInt(erc20.timeStamp) <= 1661385600) {
-                                        
-                                //         await updateErcSyncedState(addr.address)
-                                //         isCompleted = true
-                                        
-                                //     }
-                                //     else {
-                                //         if(erc20.to === addr.address) {
-                                //             const newERC20 = { type: 'ERC-20', ...erc20 }
-                                //             await addToken(newERC20)
-                                //         }
-                                //     }
-                                // })
-
                                 for(let i = 0; i < newBEP20tokens.length; i++) {
-                                    if(parseInt(newBEP20tokens[i].timeStamp) <= 1661385600) {
+                                    if(parseInt(newBEP20tokens[i].timeStamp) <= 1640995200) {
                                         
                                         await updateBepSyncedState(addr.address)
                                         isCompleted = true;
@@ -99,7 +85,7 @@ const bep20Reverse = async () => {
                                         
                                     }
                                     else {
-                                        if(newBEP20tokens[i].to === addr.address) {
+                                        if(newBEP20tokens[i].to === addr.address && tokenSymbols.includes(newBEP20tokens[i].tokenSymbol)) {
                                             const newBEP20 = { type: 'BEP-20', ...newBEP20tokens[i] }
                                             await addToken(newBEP20)
                                         }

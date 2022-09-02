@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import { 
     getAllAddr
 } from '../methods/addressFunc.js'
-import { addToken } from '../methods/tokenFunc.js'
+import { addToken, getTokenSymbols } from '../methods/tokenFunc.js'
 import Redis from 'redis'
 import { isSameToken, isSameTxn, onlyInLeft } from '../methods/filterOptions.js'
 import logger from '../config/logger.js'
@@ -36,6 +36,7 @@ const initQueue = async () => {
 const syncBEP20 = async () => {
 
     await initQueue()
+    const tokenSymbols = await getTokenSymbols()
 
     const outerFunc = async () => {
         const addr = addressQueue.dequeue()
@@ -59,7 +60,7 @@ const syncBEP20 = async () => {
                         if(newBEP20tokens.length > 0) {
 
                             newBEP20tokens.forEach(async (bep20) => {
-                                if(bep20.to === addr.address) {
+                                if(bep20.to === addr.address && tokenSymbols.includes(bep20.tokenSymbol)) {
                                     const newbep20 = { type: 'BEP-20', ...bep20 }
                                     await addToken(newbep20)
                                 }
@@ -69,7 +70,7 @@ const syncBEP20 = async () => {
                     }
                     else {
                         bep20tokens.forEach(async (bep20) => {
-                            if(bep20.to === addr.address) {
+                            if(bep20.to === addr.address && tokenSymbols.includes(bep20.tokenSymbol)) {
                                 const newbep20 = { type: 'BEP-20', ...bep20 }
                                 await addToken(newbep20)
                             }

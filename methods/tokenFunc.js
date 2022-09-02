@@ -3,6 +3,7 @@ import db from '../models/index.js'
 import sequelize from 'sequelize'
 
 const Token = db.tokenTbl
+const Symbol = db.symbolTbl
 
 const getTrueValue = (value, decimal) => {
     if(decimal !== '') {
@@ -53,6 +54,25 @@ export const getEndBlock = async (type, address) => {
 
         return endblock.blockNumber
 
+    } catch (error) {
+        logger.error(error.message)
+    }
+}
+
+export const getTokenSymbols = async () => {
+    try {
+        let symbols = await Symbol.findAll({
+            attributes: ['symbol']
+        })
+
+        symbols = JSON.stringify(symbols, null, 2)
+        symbols = JSON.parse(symbols)
+
+        symbols = symbols.map(symbol => {
+            return symbol.symbol
+        })
+
+        return symbols
     } catch (error) {
         logger.error(error.message)
     }

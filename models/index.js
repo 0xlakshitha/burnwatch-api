@@ -20,7 +20,6 @@ const sequelize = new Sequelize(
     }
 )
 
-// const sequelize = new Sequelize('mysql://d9p520qzoyvvq8iv:xwyiik6pyzdn09py@r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/z4khl02j3qejwimd')
 
 sequelize.authenticate()
     .then(() => logger.info('Connection has been established successfully.'))
@@ -34,9 +33,11 @@ db.sequelize = sequelize
 
 import addressModel from './addressModel.js'
 import tokenModel from './tokenModel.js'
+import symbolModel from './symbolModel.js'
 
 db.addressTbl = addressModel(sequelize, DataTypes)
 db.tokenTbl = tokenModel(sequelize, DataTypes)
+db.symbolTbl = symbolModel(sequelize, DataTypes)
 
 db.sequelize.sync({ force: false })
     .then(() => logger.info("All models were synchronized successfully."))

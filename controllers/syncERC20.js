@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import { 
     getAllAddr
 } from '../methods/addressFunc.js'
-import { addToken } from '../methods/tokenFunc.js'
+import { addToken, getTokenSymbols } from '../methods/tokenFunc.js'
 import Redis from 'redis'
 import { isSameToken, isSameTxn, onlyInLeft } from '../methods/filterOptions.js'
 import logger from '../config/logger.js'
@@ -36,6 +36,7 @@ const initQueue = async () => {
 const syncERC20 = async () => {
 
     await initQueue()
+    const tokenSymbols = await getTokenSymbols()
 
     const outerFunc = async () => {
         const addr = addressQueue.dequeue()
@@ -59,7 +60,7 @@ const syncERC20 = async () => {
                         if(newErc20tokens.length > 0) {
 
                             newErc20tokens.forEach(async (erc20) => {
-                                if(erc20.to === addr.address) {
+                                if(erc20.to === addr.address && tokenSymbols.includes(erc20.tokenSymbol)) {
                                     const newERC20 = { type: 'ERC-20', ...erc20 }
                                     await addToken(newERC20)
                                 }
@@ -70,7 +71,7 @@ const syncERC20 = async () => {
                     else {
 
                         erc20tokens.forEach(async (erc20) => {
-                            if(erc20.to === addr.address) {
+                            if(erc20.to === addr.address && tokenSymbols.includes(erc20.tokenSymbol)) {
                                 const newERC20 = { type: 'ERC-20', ...erc20 }
                                 await addToken(newERC20)
                             }
