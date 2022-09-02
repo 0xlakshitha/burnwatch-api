@@ -33,7 +33,7 @@ const initQueue = async () => {
     }
 }
 
-const syncBSC20 = async () => {
+const syncBEP20 = async () => {
 
     await initQueue()
 
@@ -48,34 +48,34 @@ const syncBSC20 = async () => {
                     
                     let { data } = await axios.get(`https://api.bscscan.com/api?module=account&action=tokentx&address=${addr.address}&page=1&offset=100&startblock=0&sort=desc&apikey=${apikey}`)
                     
-                    const bsc20tokens = data.result
+                    const bep20tokens = data.result
 
-                    const previousData = await redisClient.get(`BSC-${addr.address}`)
+                    const previousData = await redisClient.get(`BEP-${addr.address}`)
 
                     if(previousData) {
                         const parseTokens = await JSON.parse(previousData)
-                        const newBsc20tokens = onlyInLeft(bsc20tokens, parseTokens, isSameToken)
+                        const newBEP20tokens = onlyInLeft(bep20tokens, parseTokens, isSameToken)
                         
-                        if(newBsc20tokens.length > 0) {
+                        if(newBEP20tokens.length > 0) {
 
-                            newBsc20tokens.forEach(async (bsc20) => {
-                                if(bsc20.to === addr.address) {
-                                    const newBSC20 = { type: 'BSC-20', ...bsc20 }
-                                    await addToken(newBSC20)
+                            newBEP20tokens.forEach(async (bep20) => {
+                                if(bep20.to === addr.address) {
+                                    const newbep20 = { type: 'BEP-20', ...bep20 }
+                                    await addToken(newbep20)
                                 }
                             })
                         }
                         
                     }
                     else {
-                        bsc20tokens.forEach(async (bsc20) => {
-                            if(bsc20.to === addr.address) {
-                                const newBSC20 = { type: 'BSC-20', ...bsc20 }
-                                await addToken(newBSC20)
+                        bep20tokens.forEach(async (bep20) => {
+                            if(bep20.to === addr.address) {
+                                const newbep20 = { type: 'BEP-20', ...bep20 }
+                                await addToken(newbep20)
                             }
                         })
                         
-                        await redisClient.set(`BSC-${addr.address}`, JSON.stringify(bsc20tokens))
+                        await redisClient.set(`BEP-${addr.address}`, JSON.stringify(bep20tokens))
 
                         setTimeout(() => {
                             outerFunc()
@@ -84,7 +84,8 @@ const syncBSC20 = async () => {
                         return
                     }
 
-                    await redisClient.set(`BSC-${addr.address}`, JSON.stringify(bsc20tokens))
+                    await redisClient.set(`BEP-${addr.address}`, JSON.stringify(bep20tokens))
+                    await redisClient.set(`BEPHistory-${addr.address}`, JSON.stringify(bep20tokens))
 
                     setTimeout(() => {
                         outerFunc()
@@ -92,15 +93,14 @@ const syncBSC20 = async () => {
 
                 } catch (error) {
                     innerFunc()
-                    // logger.error(error)
-                    console.log(error)
+                    logger.error(error)
                 }
             }
 
             innerFunc()
         } else {
             setTimeout(() => {
-                syncBSC20()
+                syncBEP20()
             }, 5000) 
             
         }
@@ -110,6 +110,6 @@ const syncBSC20 = async () => {
 
 }
 
-export default syncBSC20
+export default syncBEP20
 
 

@@ -1,7 +1,7 @@
 import ageGenerator from '../methods/ageGenerator.js'
 
 export default (sequelize, DataTypes) => {
-    const TokenTxn = sequelize.define('TokenTxn', {
+    const TokenTxn = sequelize.define('TokenBurn', {
         tokenType: {
             type: DataTypes.STRING,
         },

@@ -7,7 +7,7 @@ export const getAllAddr = async () => {
     try {
 
         const addrTemp = await Address.findAll({
-            attributes: ['address', 'ercHistory', 'bscHistory'],
+            attributes: ['address', 'ercHistory', 'bepHistory'],
     
             where: {
                 isActive: true
@@ -25,7 +25,7 @@ export const getAllAddr = async () => {
 export const updateErcSyncedState = async (addr) => {
     try {
         await Address.update({ 
-            ercHIstory: true
+            ercHistory: true
         }, {
             where: {
               address: addr
@@ -36,10 +36,10 @@ export const updateErcSyncedState = async (addr) => {
     }
 }
 
-export const updateBscSyncedState = async (addr) => {
+export const updateBepSyncedState = async (addr) => {
     try {
         await Address.update({ 
-            bscHIstory: true
+            bepHistory: true
         }, {
             where: {
               address: addr

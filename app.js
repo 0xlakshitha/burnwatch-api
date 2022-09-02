@@ -27,12 +27,14 @@ app.use('/api/erc20', tokenRouter)
 app.use('/api/address', addressRouter)
 
 import syncERC20 from './controllers/syncERC20.js'
-import syncBSC20 from './controllers/syncBSC20.js'
+import syncBEP20 from './controllers/syncBEP20.js'
 import erc20Reverse from './controllers/erc20Reverse.js'
+import bep20Reverse from './controllers/bep20Reverse.js'
 
-syncERC20()
-syncBSC20()
-erc20Reverse()
+// syncERC20()
+syncBEP20()
+// erc20Reverse()
+bep20Reverse()
 
 const port = process.env.PORT || 5000
 

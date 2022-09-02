@@ -1,17 +1,17 @@
 export default (sequelize, DataTypes) => {
-    const Address = sequelize.define('Address', {
+    const Address = sequelize.define('BurnAddress', {
         address: {
             type: DataTypes.STRING,
             allowNull: false,
             primaryKey: true
         },
 
-        ercHIstory: {
+        ercHistory: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
 
-        bscHIstory: {
+        bepHistory: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
