@@ -77,3 +77,53 @@ export const getTokenSymbols = async () => {
         logger.error(error.message)
     }
 }
+
+
+export const getStartBlock = async (type, address) => {
+    try {
+        let startblock = await Token.findOne({
+            attributes: ['blockNumber'],
+            where: {
+                to: address,
+                tokenType: type
+            },
+            order: sequelize.literal('timeStamp DESC'),
+        })
+
+        startblock = JSON.stringify(startblock, null, 2)
+        startblock = JSON.parse(startblock)
+
+        return startblock.blockNumber
+
+    } catch (error) {
+        logger.error(error.message)
+    }
+}
+
+
+export const getDayBlock = async (type, address, starttime, endtime) => {
+    try {
+        let tokenBurns = await Token.findAll({
+            attributes: ['txnHash', 'blockNumber', 'timeStamp', 'from', 'to', 'contractAddress', 'value', 'tokenName', 'tokenSymbol', 'tokenDecimal'],
+            where: {
+                tokenType: type,
+                to: address,
+                timeStamp: {
+                    [sequelize.Op.and] : {
+                        [sequelize.Op.lte] : endtime ,
+                        [sequelize.Op.gte] : starttime
+                    }
+                }
+            },
+            order: sequelize.literal('timeStamp DESC')
+        })
+
+        tokenBurns = JSON.stringify(tokenBurns, null, 2)
+        tokenBurns = JSON.parse(tokenBurns)
+
+        return tokenBurns
+
+    } catch (error) {
+        logger.error(error.message)
+    }
+}

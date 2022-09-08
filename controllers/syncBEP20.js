@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import { 
     getAllAddr
 } from '../methods/addressFunc.js'
-import { addToken, getTokenSymbols } from '../methods/tokenFunc.js'
+import { addToken, getTokenSymbols, getStartBlock } from '../methods/tokenFunc.js'
 import Redis from 'redis'
 import { isSameToken, isSameTxn, onlyInLeft } from '../methods/filterOptions.js'
 import logger from '../config/logger.js'
@@ -45,9 +45,14 @@ const syncBEP20 = async () => {
         if(addr) {
             const innerFunc = async () => {
 
+                const startblock = await getStartBlock('BEP-20', addr.address)
+
                 try {
                     
-                    let { data } = await axios.get(`https://api.bscscan.com/api?module=account&action=tokentx&address=${addr.address}&page=1&offset=100&startblock=0&sort=desc&apikey=${apikey}`)
+                    let { data } = startblock ? 
+                            await axios.get(`https://api.bscscan.com/api?module=account&action=tokentx&address=${addr.address}&page=1&offset=10000&startblock=${startblock}&sort=desc&apikey=${apikey}`)
+                            :
+                            await axios.get(`https://api.bscscan.com/api?module=account&action=tokentx&address=${addr.address}&page=1&offset=100&startblock=0&sort=desc&apikey=${apikey}`)
                     
                     const bep20tokens = data.result
 

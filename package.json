@@ -21,6 +21,7 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
+    "node-cron": "^3.0.2",
     "redis": "^4.3.0",
     "sequelize": "^6.21.4",
     "winston": "^3.8.1"
