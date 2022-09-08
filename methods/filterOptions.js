@@ -7,6 +7,10 @@ export const isSameTxn = (a, b) => {
     return a.blockNumber === b.blockNumber && a.hash === b.hash && a.from === b.from && a.to === b.to
 }
 
+export const isSameTokenDB = (a, b) => {
+    return a.hash === b.txnHash && a.blockNumber === b.blockNumber && a.timeStamp == b.timeStamp && a.from === b.from && a.to === b.to && a.contractAddress === b.contractAddress && a.value === b.value && a.tokenName === b.tokenName && a.tokenSymbol === b.tokenSymbol && a.tokenDecimal === b.tokenDecimal
+}
+
 // Get items that only occur in the left array,
 // using the cb to determine equality.
 export const onlyInLeft = (left, right, cb) => (

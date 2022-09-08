@@ -6,6 +6,7 @@ import cluster from 'cluster'
 import os from 'os'
 import compression from 'compression'
 import logger from './config/logger.js'
+import cron from 'node-cron'
 
 dotenv.config()
 
@@ -30,12 +31,21 @@ import syncERC20 from './controllers/syncERC20.js'
 import syncBEP20 from './controllers/syncBEP20.js'
 import erc20Reverse from './controllers/erc20Reverse.js'
 import bep20Reverse from './controllers/bep20Reverse.js'
+import erc20DailyRec from './controllers/erc20DailyRec.js'
+import bep20DailyRec from './controllers/bep20DailyRec.js'
 
 syncERC20()
 syncBEP20()
 erc20Reverse()
 bep20Reverse()
 
+cron.schedule('30 0 * * *', () => {
+    erc20DailyRec()
+    bep20DailyRec()
+  }, {
+    scheduled: true,
+    timezone: "Asia/Colombo"
+  });
 
 const port = process.env.PORT || 5000
 
