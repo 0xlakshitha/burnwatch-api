@@ -36,8 +36,12 @@ import bep20DailyRec from './controllers/bep20DailyRec.js'
 
 syncERC20()
 syncBEP20()
-erc20Reverse()
-bep20Reverse()
+
+setTimeout(() => {
+  erc20Reverse()
+  bep20Reverse()
+}, 30000)
+
 
 cron.schedule('30 0 * * *', () => {
     erc20DailyRec()

@@ -1,42 +1,15 @@
-{"level":"info","message":"Server running on port 5000 - pid: 29533","timestamp":"2022-09-08T12:19:06.053Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T12:19:06.312Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T12:19:06.891Z"}
-{"level":"error","message":"read ECONNRESET","timestamp":"2022-09-08T13:11:22.612Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 43010","timestamp":"2022-09-08T14:44:22.912Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T14:44:23.172Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T14:44:23.586Z"}
-{"level":"error","message":"read ECONNRESET","timestamp":"2022-09-08T15:10:48.572Z"}
-{"level":"error","message":"read ECONNRESET","timestamp":"2022-09-08T15:20:38.404Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44201","timestamp":"2022-09-08T15:45:20.446Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:45:20.904Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:45:21.398Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44251","timestamp":"2022-09-08T15:45:41.713Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:45:41.979Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:45:42.510Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44292","timestamp":"2022-09-08T15:46:17.556Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:46:18.046Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:46:18.724Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44323","timestamp":"2022-09-08T15:46:29.364Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:46:29.835Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:46:30.681Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44356","timestamp":"2022-09-08T15:46:47.060Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:46:47.304Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:46:47.714Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44404","timestamp":"2022-09-08T15:47:24.280Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:47:24.530Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:47:25.157Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44579","timestamp":"2022-09-08T15:50:27.338Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:50:27.585Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:50:27.626Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44629","timestamp":"2022-09-08T15:50:51.733Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:50:51.969Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:50:52.009Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 44872","timestamp":"2022-09-08T15:59:30.756Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T15:59:31.004Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T15:59:31.043Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 45080","timestamp":"2022-09-08T16:09:58.251Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T16:09:58.545Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T16:09:58.628Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 45483","timestamp":"2022-09-08T16:17:41.280Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-08T16:17:41.512Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-08T16:17:41.553Z"}
+{"level":"info","message":"Server running on port 5000 - pid: 22637","timestamp":"2022-09-21T20:04:46.267Z"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:04:46.638Z"}
+{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:04:47.603Z"}
+{"level":"info","message":"Server running on port 5000 - pid: 22894","timestamp":"2022-09-21T20:10:41.364Z"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:10:41.621Z"}
+{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:10:42.492Z"}
+{"level":"info","message":"Server running on port 5000 - pid: 23001","timestamp":"2022-09-21T20:13:49.562Z"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:13:49.829Z"}
+{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:13:50.583Z"}
+{"level":"info","message":"Server running on port 5000 - pid: 23082","timestamp":"2022-09-21T20:15:19.730Z"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:15:19.976Z"}
+{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:15:20.730Z"}
+{"level":"info","message":"Server running on port 5000 - pid: 23197","timestamp":"2022-09-21T20:18:09.218Z"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:18:09.495Z"}
+{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:18:10.203Z"}

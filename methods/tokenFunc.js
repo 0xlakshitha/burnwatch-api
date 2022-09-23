@@ -90,6 +90,10 @@ export const getStartBlock = async (type, address) => {
             order: sequelize.literal('timeStamp DESC'),
         })
 
+        if(!startblock) {
+            return 
+        }
+
         startblock = JSON.stringify(startblock, null, 2)
         startblock = JSON.parse(startblock)
 
