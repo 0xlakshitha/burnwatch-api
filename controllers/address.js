@@ -1,5 +1,5 @@
 import axios from 'axios'
-import db from '../models/index.js'
+import { db } from '../models/index.js'
 import Redis from 'redis'
 import dotenv from 'dotenv'
 import logger from '../config/logger.js'

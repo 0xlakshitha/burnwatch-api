@@ -7,6 +7,7 @@ import os from 'os'
 import compression from 'compression'
 import logger from './config/logger.js'
 import cron from 'node-cron'
+import millify from "millify"
 
 dotenv.config()
 
@@ -33,6 +34,8 @@ import erc20Reverse from './controllers/erc20Reverse.js'
 import bep20Reverse from './controllers/bep20Reverse.js'
 import erc20DailyRec from './controllers/erc20DailyRec.js'
 import bep20DailyRec from './controllers/bep20DailyRec.js'
+import syncMcwCoins from './controllers/syncMcwCoins.js'
+import syncBurnSum from  './controllers/syncBurnSums.js'
 
 syncERC20()
 syncBEP20()
@@ -43,13 +46,20 @@ setTimeout(() => {
 }, 30000)
 
 
-cron.schedule('30 0 * * *', () => {
-    erc20DailyRec()
-    bep20DailyRec()
-  }, {
-    scheduled: true,
-    timezone: "Asia/Colombo"
-  });
+// cron.schedule('30 0 * * *', () => {
+//     erc20DailyRec()
+//     bep20DailyRec()
+//   }, {
+//     scheduled: true,
+//     timezone: "Asia/Colombo"
+//   });
+
+cron.schedule('*/5 * * * *', () => {
+  syncMcwCoins()
+  syncBurnSum()
+})
+
+
 
 const port = process.env.PORT || 5000
 

@@ -1,15 +1,13 @@
-{"level":"info","message":"Server running on port 5000 - pid: 22637","timestamp":"2022-09-21T20:04:46.267Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:04:46.638Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:04:47.603Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 22894","timestamp":"2022-09-21T20:10:41.364Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:10:41.621Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:10:42.492Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 23001","timestamp":"2022-09-21T20:13:49.562Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:13:49.829Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:13:50.583Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 23082","timestamp":"2022-09-21T20:15:19.730Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:15:19.976Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:15:20.730Z"}
-{"level":"info","message":"Server running on port 5000 - pid: 23197","timestamp":"2022-09-21T20:18:09.218Z"}
-{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-21T20:18:09.495Z"}
-{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-21T20:18:10.203Z"}
+{"level":"info","message":"Server running on port 5000 - pid: 20701","timestamp":"2022-09-26T00:41:08.699Z"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-26T00:41:08.871Z"}
+{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-26T00:41:08.949Z"}
+{"level":"info","message":"All dreamhost models were synchronized successfully.","timestamp":"2022-09-26T00:41:16.827Z"}
+{"level":"info","message":"Server running on port 5000 - pid: 20770","timestamp":"2022-09-26T00:41:53.047Z"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-26T00:41:53.211Z"}
+{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-26T00:41:53.274Z"}
+{"level":"info","message":"All dreamhost models were synchronized successfully.","timestamp":"2022-09-26T00:42:00.935Z"}
+{"level":"info","message":"Server running on port 5000 - pid: 21009","timestamp":"2022-09-26T00:50:14.426Z"}
+{"level":"info","message":"Connection has been established successfully.","timestamp":"2022-09-26T00:50:14.684Z"}
+{"level":"info","message":"All models were synchronized successfully.","timestamp":"2022-09-26T00:50:15.502Z"}
+{"level":"info","message":"Dreamhost Connection has been established successfully.","timestamp":"2022-09-26T00:50:22.465Z"}
+{"level":"info","message":"All dreamhost models were synchronized successfully.","timestamp":"2022-09-26T00:50:23.558Z"}

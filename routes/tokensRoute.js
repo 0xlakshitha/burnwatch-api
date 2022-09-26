@@ -1,9 +1,7 @@
 import express from 'express'
-import db from '../models/index.js'
 import sequelize from 'sequelize'
 
 const router = express.Router()
-const TokenTxn = db.tokenTbl
 
 import { 
     getAll, 

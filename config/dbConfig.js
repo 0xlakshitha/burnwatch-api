@@ -1,8 +1,12 @@
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 export default {
    HOST: 'localhost',
-   USER: 'root',
-   PASSWORD: '',
-   DB: 'advernetwork_db',
+   USER: process.env.LOCALSERVER_U,
+   PASSWORD: process.env.LOCALSERVER_P,
+   DB: process.env.LOCALSERVER_DB,
    dialect: 'mysql'
 }
 

@@ -1,4 +1,4 @@
-import db from '../models/index.js'
+import { db } from '../models/index.js'
 import sequelize from 'sequelize'
 import logger from '../config/logger.js'
 

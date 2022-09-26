@@ -1,4 +1,4 @@
-import db from '../models/index.js'
+import { db } from '../models/index.js'
 import logger from '../config/logger.js'
 
 const Address = db.addressTbl
